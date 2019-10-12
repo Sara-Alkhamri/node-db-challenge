@@ -3,8 +3,9 @@ exports.up = function(knex) {
     return knex.schema
     .createTable('projects', tbl => {
         tbl.increments();
-        tbl.string('name', 255).notNullable()
-        tbl.text('description')
+        tbl.string('name', 255)
+        .notNullable();
+        tbl.text('description');
         tbl.integer('completed')
         .defaultTo(0)
         .notNullable();
@@ -36,13 +37,13 @@ exports.up = function(knex) {
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('projects')
+        .inTable('projects');
         tbl.integer('resource_id')
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('resources');
-    })
+        .inTable('resources')
+    });
 };
 
 exports.down = function(knex) {
@@ -50,6 +51,6 @@ exports.down = function(knex) {
     .dropTableIfExists('project_resources')
     .dropTableIfExists('resources')
     .dropTableIfExists('tasks')
-    .dropTableIfExists('projects')
+    .dropTableIfExists('projects');
 
 };
